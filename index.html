@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MentorSpace</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0F1B2D;
+      --navy-light: #162236;
+      --gold: #C9A84C;
+      --gold-light: #E2C97A;
+      --cream: #F8F6F1;
+      --slate: #6B7E9B;
+      --slate-light: #A8B8CC;
+      --white: #ffffff;
+      --red: #e05252;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(15, 27, 45, 0.96);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--slate-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-light);
+      color: var(--navy) !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+      position: relative;
+    }
+
+    .hero h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underline-grow 0.8s 0.5s ease forwards;
+    }
+
+    @keyframes underline-grow {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--slate-light);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 90px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--slate);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+    }
+
+    .about-img-wrap {
+      aspect-ratio: 3/4;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .about-img-placeholder {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .about-img-placeholder .icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-img-placeholder p {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--slate);
+      font-weight: 500;
+      margin-top: 0.3rem;
+    }
+
+    /* VIDEOS */
+    #videos {
+      background: var(--cream);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(15, 27, 45, 0.1);
+    }
+
+    .video-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--navy), #1e3a5f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .play-btn {
+      width: 52px;
+      height: 52px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .video-card:hover .play-btn {
+      transform: scale(1.1);
+      background: var(--gold-light);
+    }
+
+    .video-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .video-info {
+      padding: 1.1rem;
+    }
+
+    .video-info h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--navy);
+    }
+
+    .video-info p {
+      font-size: 0.8rem;
+      color: var(--slate);
+    }
+
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem;
+      background: var(--white);
+      border-radius: 12px;
+      border: 2px dashed rgba(0, 0, 0, 0.1);
+      color: var(--slate);
+    }
+
+    .empty-state .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    /* BLOG */
+    #blog {
+      background: var(--navy);
+    }
+
+    #blog .section-title {
+      color: var(--cream);
+    }
+
+    #blog .section-sub {
+      color: var(--slate-light);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .blog-tag {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.15);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 0.85rem;
+    }
+
+    .blog-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .blog-card p {
+      font-size: 0.85rem;
+      color: var(--slate-light);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--slate);
+    }
+
+    /* RESOURCES */
+    #resources {
+      background: var(--cream);
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .resource-card:hover {
+      box-shadow: 0 8px 30px rgba(15, 27, 45, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .resource-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: rgba(201, 168, 76, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .resource-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .resource-info p {
+      font-size: 0.8rem;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+
+    .resource-type {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--white);
+    }
+
+    .contact-wrap {
+      max-width: 560px;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--navy);
+      background: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: var(--navy);
+      color: var(--cream);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .submit-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    /* ADMIN PANEL */
+    #admin-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      background: var(--navy);
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+      border-radius: 50px;
+      padding: 0.65rem 1.3rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #admin-toggle:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    #admin-panel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    #admin-panel.open {
+      display: flex;
+    }
+
+    .admin-box {
+      background: var(--white);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .admin-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+    }
+
+    .admin-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--slate);
+      padding: 0.25rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .admin-close:hover {
+      color: var(--red);
+      background: rgba(224, 82, 82, 0.08);
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.6rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--slate);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--navy);
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .admin-form .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .admin-btn {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.75rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .admin-btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .admin-list {
+      margin-top: 1.5rem;
+    }
+
+    .admin-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--cream);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .admin-item-title {
+      font-weight: 500;
+      color: var(--navy);
+      flex: 1;
+    }
+
+    .admin-item-meta {
+      font-size: 0.75rem;
+      color: var(--slate);
+      margin-right: 1rem;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: rgba(224, 82, 82, 0.1);
+    }
+
+    .success-msg {
+      background: rgba(39, 174, 96, 0.1);
+      color: #1a7a3a;
+      border: 1px solid rgba(39, 174, 96, 0.3);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    /* PASSWORD GATE */
+    #admin-login {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #admin-login.open {
+      display: flex;
+    }
+
+    .login-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .login-box h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box p {
+      font-size: 0.85rem;
+      color: var(--slate);
+      margin-bottom: 1.5rem;
+    }
+
+    .login-error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: var(--slate);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-img-wrap {
+        aspect-ratio: 4/3;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-stats {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MentorSpace</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Session</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Mentorship & Learning</div>
+      <h1>Build the career<br>you <span>actually want</span></h1>
+      <p class="hero-sub">Practical guidance, real experience, and a community of learners. No fluff — just the
+        knowledge that moves you forward.</p>
+      <div class="hero-actions">
+        <a href="#videos" class="btn-primary">Start Learning</a>
+        <a href="#contact" class="btn-ghost">Book a Session</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-img-placeholder">
+          <span class="icon">👤</span>
+          <p>Your Photo</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">About the Mentor</div>
+        <h2 class="section-title">Real guidance from someone who's been there</h2>
+        <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+          I've spent years navigating the gap between what school teaches and what the industry actually needs.
+          Everything I share here comes from real experience — the wins, the failures, and the things I wish someone had
+          told me earlier.
+        </p>
+        <div class="about-stats">
+          <div>
+            <span class="stat-num" id="student-count">0</span>
+            <div class="stat-label">Students Mentored</div>
+          </div>
+          <div>
+            <span class="stat-num" id="video-count">0</span>
+            <div class="stat-label">Videos Published</div>
+          </div>
+          <div>
+            <span class="stat-num" id="blog-count">0</span>
+            <div class="stat-label">Blog Posts</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 0.5rem;">Work with me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="section-header">
+      <div class="section-label">Learn</div>
+      <h2 class="section-title">Video Lessons</h2>
+      <p class="section-sub">Structured content to help you grow — from fundamentals to advanced topics.</p>
+    </div>
+    <div class="cards-grid" id="video-grid">
+      <div class="empty-state">
+        <span class="icon">🎬</span>
+        <p style="font-weight: 600; margin-bottom: 0.3rem;">Loading Content...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="section-header">
+      <div class="section-label">Read</div>
+      <h2 class="section-title">Blog & Insights</h2>
+      <p class="section-sub">Long-form thoughts on learning, careers, and what nobody else will tell you.</p>
+    </div>
+    <div class="blog-grid" id="blog-grid">
+      <div class="empty-state"
+        style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); color: var(--slate-light);">
+        <span class="icon">✍️</span>
+        <p style="font-weight: 600; margin-bottom: 0.3rem;">Loading Content...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="section-header">
+      <div class="section-label">Download</div>
+      <h2 class="section-title">Free Resources</h2>
+      <p class="section-sub">PDFs, templates, reading lists, and tools to accelerate your growth.</p>
+    </div>
+    <div class="resources-grid" id="resources-grid">
+      <div class="empty-state">
+        <span class="icon">📦</span>
+        <p style="font-weight: 600; margin-bottom: 0.3rem;">Loading Content...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrap">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Book a mentorship session</h2>
+      <p class="section-sub" style="margin-bottom: 2.5rem;">Whether you're stuck, starting out, or scaling up — let's
+        talk. Fill out the form and I'll get back to you within 48 hours.</p>
+      <div class="success-msg" id="contact-success">✅ Message sent! I'll get back to you within 48 hours.</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="c-name" placeholder="Smarth Verma" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="c-email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>What do you need help with?</label>
+        <select id="c-topic">
+          <option value="">Select a topic...</option>
+          <option>Career planning</option>
+          <option>Learning roadmap</option>
+          <option>Interview prep</option>
+          <option>Project review</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell me more</label>
+        <textarea id="c-msg" placeholder="A bit about where you are and what you're trying to achieve..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitContact()">Send Message →</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+  </footer>
+
+  <!-- ADMIN TOGGLE -->
+  <button id="admin-toggle" onclick="openAdminLogin()">⚙ Admin</button>
+
+  <!-- ADMIN LOGIN GATE -->
+  <div id="admin-login">
+    <div class="login-box">
+      <h3>Admin Access</h3>
+      <p>Unlock administrative control view panel</p>
+      <div class="form-group">
+        <input type="password" id="admin-password" placeholder="Password"
+          onkeydown="if(event.key==='Enter')checkPassword()" />
+      </div>
+      <button class="admin-btn" onclick="checkPassword()">Enter</button>
+      <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+      <button onclick="closeAdminLogin()"
+        style="background:none;border:none;color:var(--slate);font-size:0.8rem;cursor:pointer;margin-top:1rem;font-family:Inter,sans-serif;">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="admin-panel">
+    <div class="admin-box">
+      <div class="admin-header">
+        <h2>⚙ Manage Content</h2>
+        <button class="admin-close" onclick="closeAdmin()">✕</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab-btn active" onclick="switchTab('videos-tab', this)">🎬 Videos</button>
+        <button class="tab-btn" onclick="switchTab('blog-tab', this)">✍️ Blog</button>
+        <button class="tab-btn" onclick="switchTab('resources-tab', this)">📦 Resources</button>
+        <button class="tab-btn" onclick="switchTab('settings-tab', this)">⚙ Settings</button>
+      </div>
+
+      <!-- VIDEOS TAB -->
+      <div class="tab-content active" id="videos-tab">
+        <div class="success-msg" id="video-success">✅ Video added!</div>
+        <div class="admin-form">
+          <div class="form-group">
+            <label>Video Title</label>
+            <input type="text" id="v-title" placeholder="e.g. How to crack SWE interviews" />
+          </div>
+          <div class="form-group">
+            <label>YouTube Video ID or URL</label>
+            <input type="text" id="v-url" placeholder="e.g. dQw4w9WgXcQ or full YouTube URL" />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input type="text" id="v-cat" placeholder="e.g. Career, DSA, Systems" />
+          </div>
+          <div class="form-group">
+            <label>Duration (optional)</label>
+            <input type="text" id="v-dur" placeholder="e.g. 24:15" />
+          </div>
+          <button class="admin-btn" onclick="addVideo()">Add Video</button>
+        </div>
+        <div class="admin-list" id="v-list"></div>
+      </div>
+
+      <!-- BLOG TAB -->
+      <div class="tab-content" id="blog-tab">
+        <div class="success-msg" id="blog-success">✅ Blog post added!</div>
+        <div class="admin-form">
+          <div class="form-group">
+            <label>Post Title</label>
+            <input type="text" id="b-title" placeholder="e.g. What nobody tells you about HFT recruiting" />
+          </div>
+          <div class="form-group">
+            <label>Summary (shown on card)</label>
+            <textarea id="b-summary" placeholder="A 2-3 sentence summary..." style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Full Content</label>
+            <textarea id="b-content" placeholder="Write the full blog post here..."
+              style="min-height: 160px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tag / Category</label>
+            <input type="text" id="b-tag" placeholder="e.g. Career, Strategy, Tech" />
+          </div>
+          <button class="admin-btn" onclick="addBlog()">Publish Post</button>
+        </div>
+        <div class="admin-list" id="b-list"></div>
+      </div>
+
+      <!-- RESOURCES TAB -->
+      <div class="tab-content" id="resources-tab">
+        <div class="success-msg" id="res-success">✅ Resource added!</div>
+        <div class="admin-form">
+          <div class="form-group">
+            <label>Resource Title</label>
+            <input type="text" id="r-title" placeholder="e.g. DSA Study Roadmap PDF" />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" id="r-desc" placeholder="e.g. A 12-week structured plan" />
+          </div>
+          <div class="form-group">
+            <label>Link (Google Drive, PDF URL, etc.)</label>
+            <input type="text" id="r-link" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select id="r-type">
+              <option value="PDF">📄 PDF</option>
+              <option value="Template">📋 Template</option>
+              <option value="Guide">📘 Guide</option>
+              <option value="Tool">🔧 Tool</option>
+              <option value="Reading List">📚 Reading List</option>
+            </select>
+          </div>
+          <button class="admin-btn" onclick="addResource()">Add Resource</button>
+        </div>
+        <div class="admin-list" id="r-list"></div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div class="tab-content" id="settings-tab">
+        <div class="success-msg" id="settings-success">✅ Settings saved!</div>
+        <div class="admin-form">
+          <div class="form-group">
+            <label>Your Name (shown on site)</label>
+            <input type="text" id="s-name" placeholder="Your Name" />
+          </div>
+          <div class="form-group">
+            <label>Tagline</label>
+            <input type="text" id="s-tagline" placeholder="e.g. Software Engineer & Mentor" />
+          </div>
+          <div class="form-group">
+            <label>Hero Headline</label>
+            <input type="text" id="s-headline" placeholder="e.g. Build the career you actually want" />
+          </div>
+          <div class="form-group">
+            <label>Hero Subtext</label>
+            <textarea id="s-sub" style="min-height: 80px;" placeholder="Brief intro shown on hero section"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Students Mentored</label>
+            <input type="number" id="s-students" placeholder="e.g. 120" />
+          </div>
+          <div class="form-group">
+            <label style="color: var(--red);">Update Admin Password</label>
+            <input type="password" id="s-pass" placeholder="Input string updates Vercel ENV settings backend"
+              disabled />
+            <span style="font-size: 0.75rem; color: var(--slate);">Password changes are managed inside your secure
+              Vercel Dashboard dashboard.</span>
+          </div>
+          <button class="admin-btn" onclick="saveSettings()">Save Settings</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BLOG READER MODAL -->
+  <div id="blog-modal"
+    style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem;">
+    <div
+      style="background:var(--white);border-radius:16px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;padding:2.5rem;position:relative;">
+      <button onclick="closeBlogModal()"
+        style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--slate);">✕</button>
+      <div class="blog-tag" id="modal-tag"></div>
+      <h2 id="modal-title"
+        style="font-family:Fraunces,serif;font-size:1.8rem;color:var(--navy);margin-bottom:0.75rem;line-height:1.2;">
+      </h2>
+      <div id="modal-meta"
+        style="font-size:0.8rem;color:var(--slate);margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,0.08);">
+      </div>
+      <div id="modal-content" style="font-size:0.95rem;color:#333;line-height:1.8;white-space:pre-wrap;"></div>
+    </div>
+  </div>
+
+  <script>
+    // ── SERVERLESS DATA RUNTIME STORE ───────────────────────────
+    let cloudCachedStore = null;
+    let localValidatedSessionPass = "";
+
+    async function loadInitialDatabaseData() {
+      try {
+        const res = await fetch('/api/get-data');
+        if (!res.ok) throw new Error("API call error status fallback execution context loop");
+        cloudCachedStore = await res.json();
+        render();
+      } catch (err) {
+        console.error("Critical Runtime Database Connectivity Interruption: ", err);
+        // Clean fallback object layout safely preventing app crash context state
+        cloudCachedStore = { videos: [], blogs: [], resources: [], settings: {} };
+        render();
+      }
+    }
+
+    function getData() {
+      return cloudCachedStore || { videos: [], blogs: [], resources: [], settings: {} };
+    }
+
+    async function syncStoreToDatabase(updatedPayload) {
+      if (!localValidatedSessionPass) {
+        const manualRetry = prompt("Session missing auth signature context. Input Admin Password:");
+        if (!manualRetry) return false;
+        localValidatedSessionPass = manualRetry;
+      }
+
+      try {
+        const res = await fetch('/api/save-data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: localValidatedSessionPass, data: updatedPayload })
+        });
+
+        const responseBody = await res.json();
+        if (res.status === 401) {
+          alert("Authorization failed: The password you provided was rejected by the database backend server.");
+          localValidatedSessionPass = "";
+          return false;
+        }
+
+        if (res.ok && responseBody.success) {
+          cloudCachedStore = updatedPayload;
+          render();
+          return true;
+        } else {
+          alert("Database mutation update failure structure notification: " + (responseBody.error || "Unknown interface failure logs"));
+          return false;
+        }
+      } catch (err) {
+        alert("Network transmission failure loop dropped processing frame data mutations backend requests.");
+        return false;
+      }
+    }
+
+    // ── RENDER ───────────────────────────────────────────────────
+    function render() {
+      const d = getData();
+      renderVideos(d.videos);
+      renderBlogs(d.blogs);
+      renderResources(d.resources);
+      applySettings(d.settings);
+      updateCounts(d);
+    }
+
+    function updateCounts(d) {
+      animateCount('video-count', d.videos ? d.videos.length : 0);
+      animateCount('blog-count', d.blogs ? d.blogs.length : 0);
+      if (d.settings && d.settings.students) animateCount('student-count', parseInt(d.settings.students));
+    }
+
+    function animateCount(id, target) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let start = 0;
+      const step = () => {
+        start = Math.min(start + Math.ceil(target / 20), target);
+        el.textContent = start;
+        if (start < target) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    function getYouTubeId(input) {
+      const match = input.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      return match ? match[1] : input.trim();
+    }
+
+    function renderVideos(videos) {
+      const grid = document.getElementById('video-grid');
+      if (!videos || !videos.length) {
+        grid.innerHTML = `<div class="empty-state"><span class="icon">🎬</span><p style="font-weight:600;margin-bottom:0.3rem;">No videos yet</p><p style="font-size:0.8rem;">Add your first video from the admin panel</p></div>`;
+        return;
+      }
+      grid.innerHTML = videos.map((v, i) => {
+        const vid = getYouTubeId(v.url);
+        const thumb = `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
+        return `<div class="video-card" onclick="openVideo('${vid}')">
+        <div class="video-thumb" style="background-image:url('${thumb}');background-size:cover;background-position:center;">
+          ${v.cat ? `<div class="video-tag">${v.cat}</div>` : ''}
+          <div class="play-btn">▶</div>
+          ${v.duration ? `<div class="video-duration">${v.duration}</div>` : ''}
+        </div>
+        <div class="video-info">
+          <h3>${v.title}</h3>
+        </div>
+      </div>`;
+      }).join('');
+    }
+
+    function openVideo(vid) {
+      window.open(`https://www.youtube.com/watch?v=${vid}`, '_blank');
+    }
+
+    function renderBlogs(blogs) {
+      const grid = document.getElementById('blog-grid');
+      if (!blogs || !blogs.length) {
+        grid.innerHTML = `<div class="empty-state" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:var(--slate-light);"><span class="icon">✍️</span><p style="font-weight:600;margin-bottom:0.3rem;">No posts yet</p><p style="font-size:0.8rem;">Write your first blog post from the admin panel</p></div>`;
+        return;
+      }
+      grid.innerHTML = blogs.map((b, i) =>
+        `<div class="blog-card" onclick="openBlog(${i})">
+        ${b.tag ? `<div class="blog-tag">${b.tag}</div>` : ''}
+        <h3>${b.title}</h3>
+        <p>${b.summary}</p>
+        <div class="blog-meta"><span>📅 ${b.date}</span><span>→ Read more</span></div>
+      </div>`
+      ).join('');
+    }
+
+    function openBlog(i) {
+      const d = getData();
+      const b = d.blogs[i];
+      document.getElementById('modal-tag').textContent = b.tag || 'Post';
+      document.getElementById('modal-title').textContent = b.title;
+      document.getElementById('modal-meta').textContent = `Published on ${b.date}`;
+      document.getElementById('modal-content').textContent = b.content || b.summary;
+      const m = document.getElementById('blog-modal');
+      m.style.display = 'flex';
+    }
+    function closeBlogModal() { document.getElementById('blog-modal').style.display = 'none'; }
+
+    const TYPE_ICONS = { 'PDF': '📄', 'Template': '📋', 'Guide': '📘', 'Tool': '🔧', 'Reading List': '📚' };
+    function renderResources(resources) {
+      const grid = document.getElementById('resources-grid');
+      if (!resources || !resources.length) {
+        grid.innerHTML = `<div class="empty-state"><span class="icon">📦</span><p style="font-weight:600;margin-bottom:0.3rem;">No resources yet</p><p style="font-size:0.8rem;">Add resources from the admin panel</p></div>`;
+        return;
+      }
+      grid.innerHTML = resources.map(r =>
+        `<a class="resource-card" href="${r.link}" target="_blank" rel="noopener">
+        <div class="resource-icon">${TYPE_ICONS[r.type] || '📄'}</div>
+        <div class="resource-info">
+          <h4>${r.title}</h4>
+          <p>${r.desc}</p>
+          <span class="resource-type">${r.type}</span>
+        </div>
+      </a>`
+      ).join('');
+    }
+
+    function applySettings(s) {
+      if (!s) return;
+      if (s.headline) document.querySelector('.hero h1').innerHTML = s.headline.replace('*', '<span>') + '</span>';
+      if (s.sub) document.querySelector('.hero-sub').textContent = s.sub;
+      if (s.name) document.querySelector('.nav-logo').textContent = s.name;
+      // pre-fill settings form
+      if (document.getElementById('s-name')) {
+        document.getElementById('s-name').value = s.name || '';
+        document.getElementById('s-tagline').value = s.tagline || '';
+        document.getElementById('s-headline').value = s.headline || '';
+        document.getElementById('s-sub').value = s.sub || '';
+        document.getElementById('s-students').value = s.students || '';
+      }
+    }
+
+    // ── ADMIN ACTIONS ────────────────────────────────────────────
+    async function addVideo() {
+      const title = document.getElementById('v-title').value.trim();
+      const url = document.getElementById('v-url').value.trim();
+      const cat = document.getElementById('v-cat').value.trim();
+      const duration = document.getElementById('v-dur').value.trim();
+      if (!title || !url) return alert('Title and URL are required.');
+
+      const d = structuredClone(getData());
+      if (!d.videos) d.videos = [];
+      d.videos.unshift({ title, url, cat, duration, date: new Date().toLocaleDateString() });
+
+      const success = await syncStoreToDatabase(d);
+      if (success) {
+        renderAdminLists();
+        ['v-title', 'v-url', 'v-cat', 'v-dur'].forEach(id => document.getElementById(id).value = '');
+        showSuccess('video-success');
+      }
+    }
+
+    async function addBlog() {
+      const title = document.getElementById('b-title').value.trim();
+      const summary = document.getElementById('b-summary').value.trim();
+      const content = document.getElementById('b-content').value.trim();
+      const tag = document.getElementById('b-tag').value.trim();
+      if (!title || !summary) return alert('Title and summary are required.');
+
+      const d = structuredClone(getData());
+      if (!d.blogs) d.blogs = [];
+      d.blogs.unshift({ title, summary, content, tag, date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) });
+
+      const success = await syncStoreToDatabase(d);
+      if (success) {
+        renderAdminLists();
+        ['b-title', 'b-summary', 'b-content', 'b-tag'].forEach(id => document.getElementById(id).value = '');
+        showSuccess('blog-success');
+      }
+    }
+
+    async function addResource() {
+      const title = document.getElementById('r-title').value.trim();
+      const desc = document.getElementById('r-desc').value.trim();
+      const link = document.getElementById('r-link').value.trim();
+      const type = document.getElementById('r-type').value;
+      if (!title || !link) return alert('Title and link are required.');
+
+      const d = structuredClone(getData());
+      if (!d.resources) d.resources = [];
+      d.resources.push({ title, desc, link, type });
+
+      const success = await syncStoreToDatabase(d);
+      if (success) {
+        renderAdminLists();
+        ['r-title', 'r-desc', 'r-link'].forEach(id => document.getElementById(id).value = '');
+        showSuccess('res-success');
+      }
+    }
+
+    async function saveSettings() {
+      const d = structuredClone(getData());
+      d.settings = {
+        name: document.getElementById('s-name').value.trim(),
+        tagline: document.getElementById('s-tagline').value.trim(),
+        headline: document.getElementById('s-headline').value.trim(),
+        sub: document.getElementById('s-sub').value.trim(),
+        students: document.getElementById('s-students').value.trim(),
+      };
+
+      const success = await syncStoreToDatabase(d);
+      if (success) {
+        showSuccess('settings-success');
+      }
+    }
+
+    async function deleteItem(type, i) {
+      if (!confirm("Are you sure you want to permanently erase this item from the cloud database?")) return;
+      const d = structuredClone(getData());
+      d[type].splice(i, 1);
+
+      const success = await syncStoreToDatabase(d);
+      if (success) {
+        renderAdminLists();
+      }
+    }
+
+    function renderAdminLists() {
+      const d = getData();
+      document.getElementById('v-list').innerHTML = (d.videos || []).map((v, i) =>
+        `<div class="admin-item"><span class="admin-item-title">${v.title}</span><span class="admin-item-meta">${v.cat || ''}</span><button class="delete-btn" onclick="deleteItem('videos',${i})">🗑</button></div>`
+      ).join('') || '<p style="font-size:0.8rem;color:var(--slate);text-align:center;padding:1rem;">No videos added yet</p>';
+
+      document.getElementById('b-list').innerHTML = (d.blogs || []).map((b, i) =>
+        `<div class="admin-item"><span class="admin-item-title">${b.title}</span><span class="admin-item-meta">${b.date}</span><button class="delete-btn" onclick="deleteItem('blogs',${i})">🗑</button></div>`
+      ).join('') || '<p style="font-size:0.8rem;color:var(--slate);text-align:center;padding:1rem;">No posts added yet</p>';
+
+      document.getElementById('r-list').innerHTML = (d.resources || []).map((r, i) =>
+        `<div class="admin-item"><span class="admin-item-title">${r.title}</span><span class="admin-item-meta">${r.type}</span><button class="delete-btn" onclick="deleteItem('resources',${i})">🗑</button></div>`
+      ).join('') || '<p style="font-size:0.8rem;color:var(--slate);text-align:center;padding:1rem;">No resources added yet</p>';
+    }
+
+    function showSuccess(id) {
+      const el = document.getElementById(id);
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 3000);
+    }
+
+    // ── UI MODAL VIEW INTERACTION LOGIC ──────────────────────────
+    function openAdminLogin() {
+      document.getElementById('admin-login').classList.add('open');
+      document.getElementById('admin-password').value = '';
+      document.getElementById('login-error').style.display = 'none';
+      setTimeout(() => document.getElementById('admin-password').focus(), 100);
+    }
+    function closeAdminLogin() { document.getElementById('admin-login').classList.remove('open'); }
+
+    async function checkPassword() {
+      const val = document.getElementById('admin-password').value;
+      // We attempt an instant verify sequence testing permissions using a database pull/save simulation test route
+      const currentStoreState = getData();
+
+      document.getElementById('admin-btn');
+      const testingRes = await fetch('/api/save-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: val, data: currentStoreState })
+      });
+
+      if (testingRes.ok) {
+        localValidatedSessionPass = val; // Store valid signature globally for runtime database persistence saves
+        closeAdminLogin();
+        openAdmin();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('admin-password').value = '';
+      }
+    }
+
+    function openAdmin() {
+      document.getElementById('admin-panel').classList.add('open');
+      renderAdminLists();
+      applySettings(getData().settings);
+    }
+    function closeAdmin() { document.getElementById('admin-panel').classList.remove('open'); }
+
+    // ── TABS ────────────────────────────────────────────────────
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // ── CONTACT ─────────────────────────────────────────────────
+    function submitContact() {
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      if (!name || !email) return alert('Please fill in your name and email.');
+      document.getElementById('contact-success').style.display = 'block';
+      ['c-name', 'c-email', 'c-msg'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('c-topic').value = '';
+    }
+
+    // close panels on outside click
+    document.getElementById('admin-panel').addEventListener('click', function (e) {
+      if (e.target === this) closeAdmin();
+    });
+    document.getElementById('admin-login').addEventListener('click', function (e) {
+      if (e.target === this) closeAdminLogin();
+    });
+    document.getElementById('blog-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeBlogModal();
+    });
+
+    // ── INITIALIZATION RUNTIME ──────────────────────────────────
+    loadInitialDatabaseData();
+  </script>
+</body>
+
+</html>
