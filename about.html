@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About - MentorSpace</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-img-wrap {
+            aspect-ratio: 3/4;
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0F1B2D 0%, #1e3a5f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-img-placeholder {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .about-img-placeholder .icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-img-placeholder p {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--slate);
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-img-wrap {
+                aspect-ratio: 4/3;
+            }
+
+            .about-stats {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html" style="color:var(--gold)">About</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-img-wrap">
+                <div class="about-img-placeholder"><span class="icon">👤</span>
+                    <p>Your Photo</p>
+                </div>
+            </div>
+            <div>
+                <div class="section-label">About the Mentor</div>
+                <h2 class="section-title">Real guidance from someone who's been there</h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+                    I've spent years navigating the gap between what school teaches and what the industry actually
+                    needs. Everything I share here comes from real experience.
+                </p>
+                <div class="about-stats">
+                    <div><span class="stat-num" id="student-count">0</span>
+                        <div class="stat-label">Students Mentored</div>
+                    </div>
+                    <div><span class="stat-num" id="video-count">0</span>
+                        <div class="stat-label">Videos Published</div>
+                    </div>
+                    <div><span class="stat-num" id="blog-count">0</span>
+                        <div class="stat-label">Blog Posts</div>
+                    </div>
+                </div>
+                <a href="contact.html" class="btn-primary" style="margin-top: 0.5rem;">Work with me</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        Tar
+        function render() {
+            const d = getData();
+            applyGlobalSettings(d.settings);
+            animateCount('video-count', d.videos ? d.videos.length : 0);
+            animateCount('blog-count', d.blogs ? d.blogs.length : 0);
+            if (d.settings && d.settings.students) animateCount('student-count', parseInt(d.settings.students));
+        }
+        function animateCount(id, target) {
+            const el = document.getElementById(id); if (!el) return;
+            let start = 0;
+            const step = () => {
+                start = Math.min(start + Math.ceil(target / 20), target); el.textContent = start;
+                if (start < target) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+    </script>
+</body>
+
+</html>

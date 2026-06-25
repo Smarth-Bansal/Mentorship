@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - MentorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #blog {
+            background: var(--navy);
+        }
+
+        #blog .section-title {
+            color: var(--cream);
+        }
+
+        #blog .section-sub {
+            color: var(--slate-light);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="blog.html" style="color:var(--gold)">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <section id="blog">
+        <div class="section-header">
+            <div class="section-label">Read</div>
+            <h2 class="section-title">Blog & Insights</h2>
+            <p class="section-sub">Long-form thoughts on learning, careers, and what nobody else will tell you.</p>
+        </div>
+        <div class="blog-grid" id="blog-grid">
+            <div class="empty-state"
+                style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); color: var(--slate-light);">
+                <span class="icon">✍️</span>
+                <p>Loading Content...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        function render() {
+            const d = getData(); applyGlobalSettings(d.settings);
+            const grid = document.getElementById('blog-grid');
+            if (!d.blogs || !d.blogs.length) {
+                grid.innerHTML = `<div class="empty-state"><span class="icon">✍️</span><p>No posts found</p></div>`;
+                return;
+            }
+            grid.innerHTML = d.blogs.map((b, i) =>
+                /* Crucial Modification: Wraps item inside href targeting blank separate tab view context */
+                `<a class="blog-card" href="post.html?id=${i}" target="_blank">
+          ${b.tag ? `<div class="blog-tag">${b.tag}</div>` : ''}
+          <h3>${b.title}</h3>
+          <p>${b.summary}</p>
+          <div class="blog-meta"><span>📅 ${b.date}</span><span>→ Read article</span></div>
+        </a>`
+            ).join('');
+        }
+    </script>
+</body>
+
+</html>

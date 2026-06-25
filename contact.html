@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Session - MentorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-wrap {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--navy);
+            background: var(--cream);
+            outline: none;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--navy);
+            color: var(--cream);
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-1px);
+        }
+
+        .success-msg {
+            background: rgba(39, 174, 96, 0.1);
+            color: #1a7a3a;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <section id="contact">
+        <div class="contact-wrap">
+            <div class="section-label">Get in Touch</div>
+            <h2 class="section-title">Book a mentorship session</h2>
+            <p class="section-sub" style="margin-bottom: 2.5rem;">Fill out the form and I'll get back to you within 48
+                hours.</p>
+            <div class="success-msg" id="contact-success">✅ Message sent!</div>
+
+            <div class="form-group"><label>Your Name</label><input type="text" id="c-name" placeholder="Name" /></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="c-email"
+                    placeholder="you@example.com" /></div>
+            <div class="form-group">
+                <label>What do you need help with?</label>
+                <select id="c-topic">
+                    <option value="">Select a topic...</option>
+                    <option>Career planning</option>
+                    <option>Learning roadmap</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Tell me more</label><textarea id="c-msg"
+                    placeholder="A bit about where you are..."></textarea></div>
+            <button class="submit-btn" onclick="submitContact()">Send Message →</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        function render() { applyGlobalSettings(getData().settings); }
+        function submitContact() {
+            const name = document.getElementById('c-name').value.trim();
+            const email = document.getElementById('c-email').value.trim();
+            if (!name || !email) return alert('Please fill in required fields.');
+            document.getElementById('contact-success').style.display = 'block';
+            ['c-name', 'c-email', 'c-msg'].forEach(id => document.getElementById(id).value = '');
+        }
+    </script>
+</body>
+
+</html>

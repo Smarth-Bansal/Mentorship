@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - MentorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: var(--cream);
+            color: var(--navy);
+        }
+
+        .post-wrapper {
+            max-width: 680px;
+            margin: 120px auto 60px;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            line-height: 1.2;
+            margin: 1rem 0;
+            color: var(--navy);
+        }
+
+        .meta-divider {
+            color: var(--slate);
+            font-size: 0.85rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .article-body {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <div class="post-wrapper">
+        <div class="blog-tag" id="post-tag">Article</div>
+        <h1 id="post-title">Loading post content...</h1>
+        <div class="meta-divider" id="post-meta"></div>
+        <article class="article-body" id="post-content"></article>
+    </div>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        function render() {
+            const d = getData(); applyGlobalSettings(d.settings);
+            const urlParams = new URLSearchParams(window.location.search);
+            const index = urlParams.get('id');
+            const post = d.blogs && d.blogs[index];
+
+            if (post) {
+                document.getElementById('post-tag').textContent = post.tag || 'Insight';
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-meta').textContent = `Published on ${post.date}`;
+                document.getElementById('post-content').textContent = post.content || post.summary;
+                document.title = `${post.title} - MentorSpace`;
+            } else {
+                document.getElementById('post-title').textContent = "Article Not Found";
+            }
+        }
+    </script>
+</body>
+
+</html>

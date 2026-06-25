@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Videos - MentorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="videos.html" style="color:var(--gold)">Videos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <section id="videos">
+        <div class="section-header">
+            <div class="section-label">Learn</div>
+            <h2 class="section-title">Video Lessons</h2>
+            <p class="section-sub">Structured content to help you grow — from fundamentals to advanced topics.</p>
+        </div>
+        <div class="cards-grid" id="video-grid">
+            <div class="empty-state"><span class="icon">🎬</span>
+                <p>Loading Content...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        function render() {
+            const d = getData(); applyGlobalSettings(d.settings);
+            const grid = document.getElementById('video-grid');
+            if (!d.videos || !d.videos.length) {
+                grid.innerHTML = `<div class="empty-state"><span class="icon">🎬</span><p style="font-weight:600;">No videos yet</p></div>`;
+                return;
+            }
+            grid.innerHTML = d.videos.map(v => {
+                const vid = getYouTubeId(v.url);
+                return `<div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=${vid}', '_blank')">
+        <div class="video-thumb" style="background-image:url('https://img.youtube.com/vi/${vid}/mqdefault.jpg');background-size:cover;background-position:center;">
+          ${v.cat ? `<div class="video-tag">${v.cat}</div>` : ''}
+          <div class="play-btn">▶</div>
+          ${v.duration ? `<div class="video-duration">${v.duration}</div>` : ''}
+        </div>
+        <div class="video-info"><h3>${v.title}</h3></div>
+      </div>`;
+            }).join('');
+        }
+    </script>
+</body>
+
+</html>s

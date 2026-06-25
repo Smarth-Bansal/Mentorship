@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resources - MentorSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">MentorSpace</a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html" style="color:var(--gold)">Resources</a></li>
+            <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+    </nav>
+
+    <section id="resources">
+        <div class="section-header">
+            <div class="section-label">Download</div>
+            <h2 class="section-title">Free Resources</h2>
+            <p class="section-sub">PDFs, templates, reading lists, and tools to accelerate your growth.</p>
+        </div>
+        <div class="resources-grid" id="resources-grid">
+            <div class="empty-state"><span class="icon">📦</span>
+                <p>Loading Content...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>MentorSpace</span> — Built with purpose.</p>
+    </footer>
+    <script src="runtime.js"></script>
+    <script>
+        const TYPE_ICONS = { 'PDF': '📄', 'Template': '📋', 'Guide': '📘', 'Tool': '🔧', 'Reading List': '📚' };
+        function render() {
+            const d = getData(); applyGlobalSettings(d.settings);
+            const grid = document.getElementById('resources-grid');
+            if (!d.resources || !d.resources.length) {
+                grid.innerHTML = `<div class="empty-state"><span class="icon">📦</span><p>No resources yet</p></div>`;
+                return;
+            }
+            grid.innerHTML = d.resources.map(r =>
+                `<a class="resource-card" href="${r.link}" target="_blank" rel="noopener">
+        <div class="resource-icon">${TYPE_ICONS[r.type] || '📄'}</div>
+        <div class="resource-info">
+          <h4>${r.title}</h4>
+          <p>${r.desc}</p>
+          <span class="resource-type">${r.type}</span>
+        </div>
+      </a>`
+            ).join('');
+        }
+    </script>
+</body>
+
+</html>
